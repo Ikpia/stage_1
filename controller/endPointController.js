@@ -5,9 +5,6 @@ const controller = async (req, res) => {
     const currentDate = new Date();
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const currentDay = daysOfWeek[currentDate.getDay()];
-    var today = new Date();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    console.log("Current time:", time);
     const currentUtcTime = new Date().toUTCString();
     // Create date objects for +/-2 hours from now
     const twoHoursAgo = new Date();
