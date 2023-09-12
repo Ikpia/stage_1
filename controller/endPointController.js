@@ -5,7 +5,10 @@ const controller = async (req, res) => {
     const currentDate = new Date();
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const currentDay = daysOfWeek[currentDate.getDay()];
-
+    var today = new Date();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    console.log("Current time:", time);
+    const currentUtcTime = new Date().toUTCString();
     // Create date objects for +/-2 hours from now
     const twoHoursAgo = new Date();
     twoHoursAgo.setUTCHours(twoHoursAgo.getUTCHours() - 2);
@@ -14,10 +17,10 @@ const controller = async (req, res) => {
     twoHoursFromNow.setUTCHours(twoHoursFromNow.getUTCHours() + 2);
 
     // Validate if the current UTC time is within the range
-    if (currentDate >= twoHoursAgo.toUTCString() && currentDate <= twoHoursFromNow.toUTCString()) {
-        const currentTime = currentDate.toUTCString();
+    if (currentUtcTime >= twoHoursAgo.toUTCString() && currentUtcTime <= twoHoursFromNow.toUTCString()) {
+        const currentTime = currentDate.toISOString();
         console.log("Current UTC time is within the range of +/-2 hours.");
-        console.log("Current UTC time:", currentTime);
+        console.log("Current UTC time:", currentUtcTime, currentDate);
 
         const  response = {
             "slack_name": slack_name,
