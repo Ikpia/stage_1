@@ -18,7 +18,14 @@ const controller = async (req, res) => {
 
     // Validate if the current UTC time is within the range
     if (currentUtcTime >= twoHoursAgo.toUTCString() && currentUtcTime <= twoHoursFromNow.toUTCString()) {
-        const currentTime = currentDate.toISOString();
+        const year = currentDate.getUTCFullYear();
+        const month = String(currentDate.getUTCMonth() + 1).padStart(2, '0');
+        const day = String(currentDate.getUTCDate()).padStart(2, '0');
+        const hours = String(currentDate.getHours() - 1).padStart(2, '0');
+        const minutes = String(currentDate.getUTCMinutes()).padStart(2, '0');
+        const seconds = String(currentDate.getUTCSeconds()).padStart(2, '0');
+  
+        const currentTime = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`;
         console.log("Current UTC time is within the range of +/-2 hours.");
         console.log("Current UTC time:", currentUtcTime, currentDate);
 
