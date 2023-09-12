@@ -21,7 +21,7 @@ const controller = async (req, res) => {
         const year = currentDate.getUTCFullYear();
         const month = String(currentDate.getUTCMonth() + 1).padStart(2, '0');
         const day = String(currentDate.getUTCDate()).padStart(2, '0');
-        const hours = String(currentDate.getHours() - 1).padStart(2, '0');
+        const hours = String(currentDate.getHours()).padStart(2, '0');
         const minutes = String(currentDate.getUTCMinutes()).padStart(2, '0');
         const seconds = String(currentDate.getUTCSeconds()).padStart(2, '0');
   
