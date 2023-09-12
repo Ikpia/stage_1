@@ -6,7 +6,6 @@ const controller = async (req, res) => {
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const currentDay = daysOfWeek[currentDate.getDay()];
 
-    const currentUtcTime = new Date().toUTCString();
     // Create date objects for +/-2 hours from now
     const twoHoursAgo = new Date();
     twoHoursAgo.setUTCHours(twoHoursAgo.getUTCHours() - 2);
@@ -15,20 +14,21 @@ const controller = async (req, res) => {
     twoHoursFromNow.setUTCHours(twoHoursFromNow.getUTCHours() + 2);
 
     // Validate if the current UTC time is within the range
-    if (currentUtcTime >= twoHoursAgo.toUTCString() && currentUtcTime <= twoHoursFromNow.toUTCString()) {
-    console.log("Current UTC time is within the range of +/-2 hours.");
-    console.log("Current UTC time:", currentUtcTime);
+    if (currentDate >= twoHoursAgo.toUTCString() && currentDate <= twoHoursFromNow.toUTCString()) {
+        const currentTime = currentDate.toUTCString();
+        console.log("Current UTC time is within the range of +/-2 hours.");
+        console.log("Current UTC time:", currentTime);
 
-    const  response = {
-        "slack_name": slack_name,
-        "current_day": currentDay,
-        "utc_time": currentUtcTime,
-        "track": track,
-        "github_file_url": "",
-        "github_repo_url": "",
-        "status_code": 200,
-    }
-    res.status(200).json(response);
+        const  response = {
+            "slack_name": slack_name,
+            "current_day": currentDay,
+            "utc_time": currentTime,
+            "track": track,
+            "github_file_url": "https://github.com/Ikpia/stage_1/blob/main/server.js",
+            "github_repo_url": "https://github.com/Ikpia/stage_1",
+            "status_code": 200,
+        }
+        res.status(200).json(response);
     } else {
     console.log("Current UTC time is outside the range of +/-2 hours.");
     }
