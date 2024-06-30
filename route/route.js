@@ -1,6 +1,6 @@
-const route = require('express').Router();
-const controller = require('../controller/endPointController')
+const route = require("express").Router();
+const controller = require("../controller/endPointController");
 
-route.get('/api', controller);
+route.get("/api/hello", controller);
 
 module.exports = route;
