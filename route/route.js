@@ -1,6 +1,7 @@
 const route = require("express").Router();
-const controller = require("../controller/endPointController");
+const { controller, home } = require("../controller/endPointController");
 
 route.get("/api/hello", controller);
+route.get("/", home);
 
 module.exports = route;

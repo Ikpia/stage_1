@@ -35,4 +35,12 @@ const controller = async (req, res) => {
   }
 };
 
-module.exports = controller;
+const home = async (req, res) => {
+  try {
+    res.send("Home route");
+  } catch (error) {
+    res.send(error);
+  }
+};
+
+module.exports = { controller, home };
