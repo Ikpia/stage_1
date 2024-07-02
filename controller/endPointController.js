@@ -1,17 +1,15 @@
 require("dotenv").config();
 const axios = require("axios");
 const { IPinfoWrapper } = require("node-ipinfo");
-//const TOKEN = process.env.TOKEN;
+const TOKEN = process.env.TOKEN;
 const API_KEY = process.env.API_KEY;
-const ipinfo = new IPinfoWrapper("8fbc9748d086c6");
+const ipinfo = new IPinfoWrapper(TOKEN);
 
 const controller = async (req, res) => {
   try {
     const { visitor_name } = req.query;
     const xForwardedFor = req.headers["x-forwarded-for"];
-    const ip = xForwardedFor
-      ? xForwardedFor.split(",")[0]
-      : req.socket.remoteAddress;
+    const ip = "102.89.22.22";
     console.log(ip);
     const result = await ipinfo.lookupIp(ip);
     console.log(result);
