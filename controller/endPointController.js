@@ -8,7 +8,10 @@ const ipinfo = new IPinfoWrapper(TOKEN);
 const controller = async (req, res) => {
   try {
     const { visitor_name } = req.query;
-    const ip = req.headers["x-forwarded-for"] || req.ip;
+    const xForwardedFor = req.headers["x-forwarded-for"];
+    const ip = xForwardedFor
+      ? xForwardedFor.split(",")[0]
+      : req.socket.remoteAddress;
     console.log(ip);
     const result = await ipinfo.lookupIp(ip);
     console.log(result);
