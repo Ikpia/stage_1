@@ -1,9 +1,9 @@
 require("dotenv").config();
 const axios = require("axios");
 const { IPinfoWrapper } = require("node-ipinfo");
-const TOKEN = process.env.TOKEN;
+//const TOKEN = process.env.TOKEN;
 const API_KEY = process.env.API_KEY;
-const ipinfo = new IPinfoWrapper(TOKEN);
+const ipinfo = new IPinfoWrapper("8fbc9748d086c6");
 
 const controller = async (req, res) => {
   try {
