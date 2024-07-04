@@ -8,8 +8,11 @@ const ipinfo = new IPinfoWrapper(TOKEN);
 const controller = async (req, res) => {
   try {
     const { visitor_name } = req.query;
+    console.log(visitor_name);
     const xForwardedFor = req.headers["x-forwarded-for"];
-    const ip = "102.89.22.22";
+    const ipList = xForwardedFor ? xForwardedFor.split(",") : [];
+    const ip = ipList.length ? ipList[0].trim() : req.socket.remoteAddress;
+
     console.log(ip);
     const result = await ipinfo.lookupIp(ip);
     console.log(result);
@@ -28,7 +31,10 @@ const controller = async (req, res) => {
     const response = {
       client_ip: `${ip}`, // The IP address of the requester
       location: `${result.city}`, // The city of the requester
-      greeting: `Hello, ${visitor_name}!, the temperature is ${temperature.data.main.temp} degrees Celcius in ${result.city}`,
+      greeting:
+        "Hello, " +
+        visitor_name +
+        `!, the temperature is ${temperature.data.main.temp} degrees Celcius in ${result.city}`,
     };
     res.status(200).json(response);
   } catch (error) {
